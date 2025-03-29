@@ -1,0 +1,242 @@
+/* Root Variables for Easy Customization */
+:root {
+  --bg-color: #ffb6c1; /* Light Pink Background */
+  --container-bg: white; /* Box Background */
+  --title-color: #ff4081;
+  --yes-btn-color: rgb(44, 205, 44);
+  --no-btn-color: red;
+  --container-bg-color: rgb(249, 247, 248);
+  --text-color: black;
+  --box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  --border-radius: 15px;
+}
+
+/* Reset Default Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full Viewport Coverage */
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  display: grid;
+  place-items: center;
+  overflow: hidden; /* Prevent scrollbars from heart rain */
+}
+
+/* Heart Background */
+.heart-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Raised to ensure visibility, behind content */
+  pointer-events: none; /* Allows clicks through to buttons */
+}
+
+/* Main Container */
+.container {
+  width: 360px; /* Fixed width */
+  height: 600px; /* Fixed height */
+  padding: 25px;
+  background: var(--container-bg-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  border: 3px solid rgb(255, 254, 254);
+  backdrop-filter: blur(5px);
+  display: grid;
+  grid-template-rows: auto auto auto auto; /* Title, Image, Message, Buttons */
+  gap: 15px;
+  position: relative;
+  overflow: visible;
+  transition: opacity 0.5s ease-out;
+  z-index: 1; /* Above heart-bg */
+}
+
+/* Title */
+.title {
+  font-size: 26px;
+  color: var(--title-color);
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Image Container */
+.image-container {
+  display: grid;
+  place-items: center;
+}
+
+.display-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Message Box */
+#messageBox {
+  font-size: 18px;
+  color: var(--text-color);
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+
+/* Buttons Container */
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns by default */
+  gap: 20px;
+  justify-content: center;
+  position: static;
+  transition: grid-template-columns 0.3s ease;
+}
+
+/* When "No" button is gone, "Yes" takes full width */
+.buttons.no-btn-hidden {
+  grid-template-columns: 1fr;
+}
+
+/* Button Styles */
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
+  min-width: 100px;
+  z-index: 10; /* Above hearts */
+}
+
+#yesBtn {
+  background-color: var(--yes-btn-color);
+  color: white;
+}
+
+#yesBtn.full-width {
+  padding: 16px 20px; /* Larger when expanded */
+}
+
+#noBtn {
+  background-color: var(--no-btn-color);
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Hidden Love Gallery */
+.hidden {
+  display: none;
+}
+
+/* Love Gallery */
+.love-gallery {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 360px;
+  height: 600px;
+  display: grid;
+  grid-template-rows: auto auto auto; /* h2, photos, quotes */
+  gap: 15px;
+  justify-items: center;
+  align-content: center;
+  position: relative;
+  z-index: 1; /* Above heart-bg */
+  transition: opacity 0.5s ease-in;
+}
+
+#nextSection {
+  display: none;
+  opacity: 0;
+}
+
+.love-gallery h2 {
+  font-size: 20px;
+  color: var(--title-color);
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+.photo {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid var(--title-color);
+}
+
+/* Quotes */
+.quotes {
+  margin-top: 15px;
+}
+
+.quote {
+  font-size: 16px;
+  color: var(--text-color);
+  font-style: italic;
+  margin: 5px 0;
+}
+
+/* Heart Rain Animation */
+.heart-rain {
+  position: absolute; /* Changed to absolute within heart-bg */
+  top: -32px; /* Start above screen, adjusted for size */
+  font-size: 32px;
+  color: #ff4081; /* Match title color for visibility */
+  animation: heartFall linear infinite;
+  opacity: 0.9;
+  pointer-events: auto; /* Enable hover */
+  z-index: 0; /* Ensure behind container and nextSection */
+}
+
+@keyframes heartFall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(calc(100vh + 32px)) scale(1.2); /* Adjusted for full fall */
+    opacity: 0;
+  }
+}
+
+/* Boom Effect on Hover */
+.heart-rain:hover {
+  animation: heartBoom 0.5s ease-out forwards;
+}
+
+@keyframes heartBoom {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(2.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

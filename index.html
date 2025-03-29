@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Floating Hearts Background -->
+  <div class="heart-bg"></div>
+
+  <!-- Centered Content Box -->
+  <div class="container">
+    <h1 class="title">Will you be mine? ❤️</h1>
+
+    <!-- Image inside the container -->
+    <div class="image-container">
+        <img src="image1.jpg" alt="A special moment together" class="display-image">
+    </div>
+
+    <!-- Message Box -->
+    <div class="message-wrapper">
+      <p id="messageBox"> </p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+        <button id="yesBtn" aria-label="Say Yes">Yes! 💖</button>
+        <button id="noBtn" aria-label="Say No">No 😢</button>
+    </div>
+  </div>
+
+  <!-- Hidden Love Gallery (Revealed on 'Yes') -->
+  <div id="nextSection" class="hidden">
+    <div class="love-gallery">
+        <h2>You Said Yes! 🥰</h2>
+        <div class="photos">
+            <img src="love1.jpg" alt="Love Image 1" class="photo">
+            <img src="love2.jpg" alt="Love Image 2" class="photo">
+            <img src="love3.jpg" alt="Love Image 3" class="photo">
+        </div>
+        <div class="quotes">
+            <p class="quote">"You are the best thing that ever happened to me!"</p>
+            <p class="quote">"My heart is yours forever ❤️"</p>
+            <p class="quote">"Together, forever, no matter what! 💑"</p>
+        </div>
+        <audio id="loveSound" src="love-song.mp3"></audio>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
