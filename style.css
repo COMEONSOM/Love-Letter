@@ -9,6 +9,7 @@
   --text-color: black;
   --box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   --border-radius: 15px;
+  --dot-color: #ff4081; /* For dotted timeline line */
 }
 
 /* Reset Default Styles */
@@ -36,14 +37,14 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Raised to ensure visibility, behind content */
-  pointer-events: none; /* Allows clicks through to buttons */
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Main Container */
 .container {
-  width: 360px; /* Fixed width */
-  height: 600px; /* Fixed height */
+  width: 360px;
+  height: 600px;
   padding: 25px;
   background: var(--container-bg-color);
   border-radius: var(--border-radius);
@@ -52,12 +53,12 @@ html, body {
   border: 3px solid rgb(255, 254, 254);
   backdrop-filter: blur(5px);
   display: grid;
-  grid-template-rows: auto auto auto auto; /* Title, Image, Message, Buttons */
-  gap: 15px;
+  grid-template-rows: auto auto auto auto;
+  gap: 2px;
   position: relative;
   overflow: visible;
   transition: opacity 0.5s ease-out;
-  z-index: 1; /* Above heart-bg */
+  z-index: 1;
 }
 
 /* Title */
@@ -82,7 +83,15 @@ html, body {
   z-index: 1;
 }
 
-/* Message Box */
+/* Message Wrapper & Message Box */
+.message-wrapper {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
 #messageBox {
   font-size: 18px;
   color: var(--text-color);
@@ -95,14 +104,13 @@ html, body {
 /* Buttons Container */
 .buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns by default */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   justify-content: center;
   position: static;
   transition: grid-template-columns 0.3s ease;
 }
 
-/* When "No" button is gone, "Yes" takes full width */
 .buttons.no-btn-hidden {
   grid-template-columns: 1fr;
 }
@@ -116,7 +124,7 @@ button {
   border-radius: 8px;
   transition: transform 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
   min-width: 100px;
-  z-index: 10; /* Above hearts */
+  z-index: 10;
 }
 
 #yesBtn {
@@ -125,7 +133,7 @@ button {
 }
 
 #yesBtn.full-width {
-  padding: 16px 20px; /* Larger when expanded */
+  padding: 16px 20px;
 }
 
 #noBtn {
@@ -149,16 +157,25 @@ button:hover {
   background: rgba(255, 255, 255, 0.9);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  width: 360px;
-  height: 600px;
-  display: grid;
-  grid-template-rows: auto auto auto; /* h2, photos, quotes */
+  width: 420px;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
-  justify-items: center;
-  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
-  z-index: 1; /* Above heart-bg */
+  z-index: 1;
+  overflow-y: auto; /* Allow scrolling */
+  overflow-x: hidden; /* Prevent horizontal overflow */
   transition: opacity 0.5s ease-in;
+}
+/* Love Gallery Images */
+.love-gallery img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 #nextSection {
@@ -171,26 +188,78 @@ button:hover {
   color: var(--title-color);
 }
 
-.photos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 10px;
-  justify-content: center;
+/* Fix Timeline Container */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px; /* Adjust to fit the design */
+  margin: 20px auto;
+  padding: 10px;
+  position: relative;
 }
 
-.photo {
-  width: 100%;
-  height: 80px;
-  border-radius: 10px;
+/* Fix Timeline Points */
+.timeline-point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;  /* Take full width */
+  max-width: 300px; /* Adjust width dynamically */
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Fix Image Cutting Issue */
+.timeline-photo {
+  width: 100px;  /* Increase size */
+  height: 100px; /* Keep aspect ratio */
   object-fit: cover;
-  border: 2px solid var(--title-color);
+  border-radius: 20%;
+}
+
+/* Improve Timeline Text Layout */
+.timeline-text {
+  font-size: 16px;
+  width: 100%;
+  max-width: 250px; /* Allow text to take up space */
+  margin-top: 10px;
+  color: var(--text-color);
+  text-align: center;
+  word-wrap: break-word;
+}
+* Prevent Images from Overflowing in Timeline */
+.timeline img {
+  max-width: 100%; /* Make sure images don’t exceed their container */
+  height: auto;
+  border-radius: 10px;
+}
+.timeline-year {
+  font-size: 14px;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Fix Timeline Connector */
+.timeline-connector {
+  width: 2px; 
+  height: 40px; /* Adjusted height for better spacing */
+  background-image: repeating-linear-gradient(
+    0deg, var(--dot-color), var(--dot-color) 2px, transparent 2px, transparent 4px
+  );
+}
+/* When animated, the connector will expand to full width */
+.timeline-connector.animate {
+  width: auto;
+  height: 50px; 
 }
 
 /* Quotes */
 .quotes {
   margin-top: 15px;
 }
-
 .quote {
   font-size: 16px;
   color: var(--text-color);
@@ -200,14 +269,14 @@ button:hover {
 
 /* Heart Rain Animation */
 .heart-rain {
-  position: absolute; /* Changed to absolute within heart-bg */
-  top: -32px; /* Start above screen, adjusted for size */
-  font-size: 32px;
-  color: #ff4081; /* Match title color for visibility */
-  animation: heartFall linear infinite;
+  position: absolute;
+  top: -48px;
+  font-size: 48px;
+  color: #ff4081;
+  animation: heartFall linear 1;
   opacity: 0.9;
-  pointer-events: auto; /* Enable hover */
-  z-index: 0; /* Ensure behind container and nextSection */
+  pointer-events: auto;
+  z-index: 0;
 }
 
 @keyframes heartFall {
@@ -216,27 +285,81 @@ button:hover {
     opacity: 0.9;
   }
   100% {
-    transform: translateY(calc(100vh + 32px)) scale(1.2); /* Adjusted for full fall */
+    transform: translateY(calc(100vh + 48px)) scale(1.2);
     opacity: 0;
   }
-}
-
-/* Boom Effect on Hover */
-.heart-rain:hover {
-  animation: heartBoom 0.5s ease-out forwards;
 }
 
 @keyframes heartBoom {
   0% {
     transform: scale(1);
-    opacity: 0.9;
+    opacity: 1;
   }
   50% {
-    transform: scale(2.5);
-    opacity: 1;
+    transform: scale(3);
+    opacity: 0.5;
   }
   100% {
     transform: scale(0);
     opacity: 0;
   }
+}
+/* Music Controls */
+.music-controls {
+  position:relative;
+  right: 120px;
+  z-index: 100;
+}
+
+#muteButton {
+  background-color: white;
+  color: black;
+  border: 2px solid var(--title-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#muteButton:hover {
+  background-color: var(--title-color);
+  color: white;
+}
+.footprint-path {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.footprint {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: footprintAppear 0.5s forwards;
+}
+
+.heel {
+  width: 20px;
+  height: 30px;
+  background-color: black;
+  border-radius: 50%;
+  position: relative;
+}
+
+.toe {
+  width: 8px;
+  height: 8px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+}
+
+@keyframes footprintAppear {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
 }
