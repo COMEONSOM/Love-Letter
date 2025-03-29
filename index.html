@@ -17,36 +17,69 @@
 
     <!-- Image inside the container -->
     <div class="image-container">
-        <img src="image1.jpg" alt="A special moment together" class="display-image">
+      <img src="image1.jpg" alt="A special moment together" class="display-image">
     </div>
 
     <!-- Message Box -->
     <div class="message-wrapper">
-      <p id="messageBox"> </p>
+      <p id="messageBox"></p>
     </div>
 
     <!-- Buttons -->
     <div class="buttons">
-        <button id="yesBtn" aria-label="Say Yes">Yes! 💖</button>
-        <button id="noBtn" aria-label="Say No">No 😢</button>
+      <button id="yesBtn" aria-label="Say Yes">Yes! 💖</button>
+      <button id="noBtn" aria-label="Say No">No 😢</button>
     </div>
   </div>
 
   <!-- Hidden Love Gallery (Revealed on 'Yes') -->
   <div id="nextSection" class="hidden">
     <div class="love-gallery">
-        <h2>You Said Yes! 🥰</h2>
-        <div class="photos">
-            <img src="love1.jpg" alt="Love Image 1" class="photo">
-            <img src="love2.jpg" alt="Love Image 2" class="photo">
-            <img src="love3.jpg" alt="Love Image 3" class="photo">
+      <h2>আমি জানতাম তুমি হ্যাঁ বলবে। 🥰💞</h2>
+      
+      <!-- Timeline Roadmap -->
+      <div class="timeline">
+        <div class="timeline-point">
+          <img src="love1.jpg" alt="Love Image 1" class="timeline-photo">
+          <div class="timeline-text-box">
+            <p class="timeline-text">যেভাবে আমাদের শুরু হয়েছিল। 😍💘</p>
+            <p class="timeline-year">2021 🚀</p>
+          </div>
         </div>
-        <div class="quotes">
-            <p class="quote">"You are the best thing that ever happened to me!"</p>
-            <p class="quote">"My heart is yours forever ❤️"</p>
-            <p class="quote">"Together, forever, no matter what! 💑"</p>
+
+        <div class="timeline-connector"></div>
+
+        <div class="timeline-point">
+          <img src="love2.jpg" alt="Love Image 2" class="timeline-photo">
+          <div class="timeline-text-box">
+            <p class="timeline-text">আমরা একসাথে যেভাবে জীবনকে সামলেছি।🤝🔥</p>
+            <p class="timeline-year">2023 🌟</p>
+          </div>
         </div>
-        <audio id="loveSound" src="love-song.mp3"></audio>
+
+        <div class="timeline-connector"></div>
+
+        <div class="timeline-point">
+          <img src="love3.jpg" alt="Love Image 3" class="timeline-photo">
+          <div class="timeline-text-box">
+            <p class="timeline-text">এতকিছুর পরেও যেভাবে তুমি আমার পাশে আছো। ❤️👫</p>
+            <p class="timeline-year">2025 & Beyond ✨💫</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quotes Section -->
+      <div class="quotes">
+        <p class="quote">"You are the best thing that ever happened to me! 💖"</p>
+        <p class="quote">"My heart is yours forever! ❤️💍"</p>
+        <p class="quote">"Together, forever, no matter what! 💑🎉"</p>
+      </div>
+      <!-- Music Controls -->
+      <div class="music-controls">
+        <button id="muteButton">🔊 Mute</button>
+      </div>
+      <!-- Love Song -->
+      <audio id="loveSound" src="love-song.mp3" loop autoplay></audio>
     </div>
   </div>
 
