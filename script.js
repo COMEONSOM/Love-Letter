@@ -88,12 +88,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // **Event Listeners**
-  // Listen for mouseover, click, and touch events on the "No" button
+  // **Event Listeners for Desktop**
   noBtn.addEventListener('mouseover', moveButton);
   noBtn.addEventListener('click', moveButton);
-  noBtn.addEventListener('touchstart', moveButton);
 
+  // **Event Listener for Mobile "Hover" Simulation**
+  // This listener checks for touch movement that comes near the "No" button.
+  let canMove = true;
+  document.addEventListener('touchmove', (e) => {
+    if (!canMove) return;
+    const touch = e.touches[0];
+    const rect = noBtn.getBoundingClientRect();
+    const proximityThreshold = 50; // pixels
+
+    // If the touch point is within the proximity threshold of the button, trigger moveButton.
+    if (
+      touch.clientX > rect.left - proximityThreshold &&
+      touch.clientX < rect.right + proximityThreshold &&
+      touch.clientY > rect.top - proximityThreshold &&
+      touch.clientY < rect.bottom + proximityThreshold
+    ) {
+      canMove = false;
+      moveButton();
+      // Cooldown to avoid rapid-fire calls during continuous touch movement.
+      setTimeout(() => canMove = true, 500);
+    }
+  });
+
+  // **Yes Button Listener**
   yesBtn.addEventListener('click', () => {
     container.style.opacity = '0';
     setTimeout(() => {
